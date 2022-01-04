@@ -23,12 +23,12 @@ export default class App extends Component {
     const percent = (good * 100) / result;
     return Math.round(percent);
   };
-
-  feedbackComment = element => {
-    const name = element.target.name;
-    this.setState(prevState => ({
-      [name]: prevState[name] + 1,
-    }));
+  feedbackComment = e => {
+    this.setState(prevState => {
+      return {
+        [e.target.name]: prevState[e.target.name] + 1,
+      };
+    });
   };
 
   render() {
