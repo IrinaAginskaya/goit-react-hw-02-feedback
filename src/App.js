@@ -23,23 +23,21 @@ export default class App extends Component {
     const percent = (good * 100) / result;
     return Math.round(percent);
   };
-  feedbackComment = e => {
-    this.setState(prevState => {
-      return {
-        [e.target.name]: prevState[e.target.name] + 1,
-      };
-    });
+  feedbackComment = name => {
+    this.setState(prevState => ({
+      [name]: (prevState[name] += 1),
+    }));
   };
 
   render() {
     const { good, neutral, bad } = this.state;
     const total = this.totalCount();
     const feedback = this.feedbackCount();
-    const objKey = Object.keys(this.state);
+    // const objKey = Object.keys(this.state);
     return (
       <div>
         <Section title="Please leave feedback">
-          <FeedbackOptions options={objKey} onLeaveFeedback={this.feedbackComment} />{' '}
+          <FeedbackOptions options={this.state} onLeaveFeedback={this.feedbackComment} />{' '}
         </Section>
         {total === 0 ? (
           <Notification message="There is no feedback" />

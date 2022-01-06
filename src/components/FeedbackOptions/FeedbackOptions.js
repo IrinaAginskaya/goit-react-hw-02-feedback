@@ -5,16 +5,35 @@ import React from 'react';
 const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <>
-      {options.map(option => (
-        <button key={option} type="button" name={option} onClick={onLeaveFeedback}>
+      {Object.keys(options).map(option => (
+        <button
+          key={option}
+          type="button"
+          name={option}
+          onClick={e => {
+            onLeaveFeedback(e.currentTarget.name);
+          }}
+        >
           {option}
         </button>
       ))}
     </>
   );
 };
+
+// const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+//   return (
+//     <>
+//       {options.map(option => (
+//         <button key={option} type="button" name={option} onClick={onLeaveFeedback}>
+//           {option}
+//         </button>
+//       ))}
+//     </>
+//   );
+// };
 FeedbackOptions.propTypes = {
-  options: PropTypes.array,
+  options: PropTypes.object,
   onLeaveFeedback: PropTypes.func,
 };
 export default FeedbackOptions;
